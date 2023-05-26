@@ -1,13 +1,11 @@
 import { Component } from '@angular/core';
-import { NxWelcomeComponent } from './nx-welcome.component';
+import { PersonDisplayComponent } from './components/person-display/person-display.component';
 
 @Component({
   standalone: true,
-  imports: [NxWelcomeComponent],
+  imports: [PersonDisplayComponent],
   selector: 'component-store-signals-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'component-store';
-}
+export class AppComponent {}

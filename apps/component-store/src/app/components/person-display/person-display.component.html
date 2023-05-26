@@ -1,0 +1,9 @@
+<div *ngFor="let person of people" class="border rounded border-jason-dark p-2">
+  <div class="text-lg font-semibold text-jason-med">
+    {{ person.firstName }} {{ person.lastName }}
+  </div>
+  <div class="text-sm font-light italic text-jason-light">
+    {{ person.age }} years old
+  </div>
+  <div>{{ person.firstName }} likes the color {{ person.favoriteColor }}!</div>
+</div>
