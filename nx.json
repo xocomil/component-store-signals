@@ -3,6 +3,7 @@
   "affected": {
     "defaultBase": "master"
   },
+  "defaultProject": "component-store",
   "tasksRunnerOptions": {
     "default": {
       "runner": "nx-cloud",
