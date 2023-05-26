@@ -21,7 +21,7 @@ import { PersonService } from '../../services/person.service';
 })
 export class PersonDisplayComponent implements OnInit, OnDestroy {
   @HostBinding('class') get classBinding(): string {
-    return 'w-[85%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto';
+    return 'w-[85%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto mt-5';
   }
 
   readonly #personService = inject(PersonService);
