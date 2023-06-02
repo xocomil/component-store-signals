@@ -3,43 +3,58 @@ import {
   ChangeDetectionStrategy,
   Component,
   HostBinding,
-  OnDestroy,
   OnInit,
   inject,
 } from '@angular/core';
-import { Subject, takeUntil } from 'rxjs';
-import { Person } from '../../models/person.model';
-import { PersonService } from '../../services/person.service';
+import { InitialsComponent } from '../initials/initials.component';
+import { PersonCountComponent } from '../person-count/person-count.component';
+import { PersonDisplayStateService } from './person-display.state.service';
 
 @Component({
   selector: 'component-store-signals-person-display',
   standalone: true,
-  imports: [CommonModule],
-  templateUrl: './person-display.component.html',
+  template: `
+    <button type="button" class="btn btn-secondary" (click)="refresh()">
+      Refresh
+    </button>
+    <div
+      *ngFor="let person of people()"
+      class="border rounded border-primary p-2"
+    >
+      <div class="text-lg font-semibold text-jason-med">
+        {{ person.firstName }} {{ person.lastName }}
+      </div>
+      <div class="text-sm font-light italic text-jason-light">
+        {{ person.age }} years old
+      </div>
+      <div>
+        {{ person.firstName }} likes the color {{ person.favoriteColor }}!
+      </div>
+    </div>
+    <component-store-signals-initials />
+    <component-store-signals-person-count />
+  `,
   styleUrls: ['./person-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [PersonDisplayStateService],
+  imports: [CommonModule, InitialsComponent, PersonCountComponent],
 })
-export class PersonDisplayComponent implements OnInit, OnDestroy {
+export class PersonDisplayComponent implements OnInit {
   @HostBinding('class') get classBinding(): string {
     return 'w-[85%] grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 mx-auto mt-5';
   }
 
-  readonly #personService = inject(PersonService);
-  readonly #destroyed$ = new Subject<void>();
+  readonly #personDisplayStateService = inject(PersonDisplayStateService);
 
-  protected people: Person[] = [];
+  protected readonly people = this.#personDisplayStateService.people;
+  protected readonly personCount = this.#personDisplayStateService.personCount;
+  protected readonly initials = this.#personDisplayStateService.initials;
 
   ngOnInit(): void {
-    this.#personService
-      .getPeople(25)
-      .pipe(takeUntil(this.#destroyed$))
-      .subscribe((people: Person[]) => {
-        this.people = people;
-      });
+    this.#personDisplayStateService.getPeople();
   }
 
-  ngOnDestroy(): void {
-    this.#destroyed$.next();
-    this.#destroyed$.complete();
+  protected refresh() {
+    this.#personDisplayStateService.getPeople();
   }
 }
