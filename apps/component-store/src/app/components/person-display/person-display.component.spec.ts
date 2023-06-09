@@ -1,21 +1,22 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { signal } from '@angular/core';
+import { createComponentFactory, mockProvider } from '@ngneat/spectator/jest';
 import { PersonDisplayComponent } from './person-display.component';
+import { PersonDisplayStateService } from './person-display.state.service';
 
 describe('PersonDisplayComponent', () => {
-  let component: PersonDisplayComponent;
-  let fixture: ComponentFixture<PersonDisplayComponent>;
+  const personDisplayStateServiceStub =
+    (): Partial<PersonDisplayStateService> => ({
+      people: signal([]),
+    });
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [PersonDisplayComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(PersonDisplayComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  const createComponent = createComponentFactory({
+    component: PersonDisplayComponent,
+    providers: [
+      mockProvider(PersonDisplayStateService, personDisplayStateServiceStub()),
+    ],
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(createComponent()).toBeTruthy();
   });
 });

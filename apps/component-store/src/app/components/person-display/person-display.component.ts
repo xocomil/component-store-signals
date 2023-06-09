@@ -47,8 +47,6 @@ export class PersonDisplayComponent implements OnInit {
   readonly #personDisplayStateService = inject(PersonDisplayStateService);
 
   protected readonly people = this.#personDisplayStateService.people;
-  protected readonly personCount = this.#personDisplayStateService.personCount;
-  protected readonly initials = this.#personDisplayStateService.initials;
 
   ngOnInit(): void {
     this.#personDisplayStateService.getPeople();
