@@ -96,6 +96,15 @@
       "options": {
         "buildTarget": "component-store:build"
       }
+    },
+    "component-test": {
+      "executor": "@nx/cypress:cypress",
+      "options": {
+        "cypressConfig": "apps/component-store/cypress.config.ts",
+        "testingType": "component",
+        "skipServe": true,
+        "devServerTarget": "component-store:build"
+      }
     }
   }
 }
