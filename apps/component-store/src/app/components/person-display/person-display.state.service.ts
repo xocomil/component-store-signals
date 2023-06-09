@@ -1,4 +1,4 @@
-import { computed, inject } from '@angular/core';
+import { Injectable, computed, inject } from '@angular/core';
 import { ComponentStore, tapResponse } from '@ngrx/component-store';
 import { exhaustMap, pipe } from 'rxjs';
 import { Person } from '../../models/person.model';
@@ -12,6 +12,7 @@ const initialState = (): PersonDisplayState => ({
   people: [],
 });
 
+@Injectable()
 export class PersonDisplayStateService extends ComponentStore<PersonDisplayState> {
   readonly #personService = inject(PersonService);
 
