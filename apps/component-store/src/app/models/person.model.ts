@@ -9,10 +9,13 @@ export type Person = {
   favoriteColor: string;
 };
 
-export const createFakePerson = (): Person => ({
+export const createFakePerson = ({
+  firstName = faker.person.firstName(),
+  lastName = faker.person.lastName(),
+}: Partial<Person> = {}): Person => ({
   id: faker.string.uuid(),
-  firstName: faker.person.firstName(),
-  lastName: faker.person.lastName(),
+  firstName,
+  lastName,
   age: faker.number.int({ min: 6, max: 120 }),
   email: faker.internet.email(),
   favoriteColor: faker.helpers.arrayElement(['red', 'blue', 'green']),
