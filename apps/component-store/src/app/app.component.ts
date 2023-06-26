@@ -6,17 +6,7 @@ import { PersonDisplayComponent } from './components/person-display/person-displ
   standalone: true,
   imports: [PersonDisplayComponent, InputTransformTestComponent],
   selector: 'component-store-signals-root',
-  template: ` <component-store-signals-input-transform-test
-      bold
-      large
-      pink
-      [color]="favoriteNumber + 'blue'"
-      favoriteNumber
-      secondFavoriteNumber
-      [signalInput]="3"
-    />
-    <hr />
-    <component-store-signals-person-display />`,
+  template: `<component-store-signals-person-display />`,
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
