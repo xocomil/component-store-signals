@@ -8,6 +8,7 @@ import {
 } from '@angular/core';
 import { InitialsComponent } from '../initials/initials.component';
 import { PersonCountComponent } from '../person-count/person-count.component';
+import { PersonDetailsComponent } from '../person-details/person-details.component';
 import { PersonDisplayStateService } from './person-display.state.service';
 
 @Component({
@@ -17,27 +18,22 @@ import { PersonDisplayStateService } from './person-display.state.service';
     <button type="button" class="btn btn-secondary" (click)="refresh()">
       Refresh
     </button>
-    <div
+    <component-store-signals-person-details
       *ngFor="let person of people()"
-      class="border rounded border-primary p-2"
-    >
-      <div class="text-lg font-semibold text-jason-med">
-        {{ person.firstName }} {{ person.lastName }}
-      </div>
-      <div class="text-sm font-light italic text-jason-light">
-        {{ person.age }} years old
-      </div>
-      <div>
-        {{ person.firstName }} likes the color {{ person.favoriteColor }}!
-      </div>
-    </div>
+      [person]="person"
+    />
     <component-store-signals-initials />
     <component-store-signals-person-count />
   `,
   styleUrls: ['./person-display.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [PersonDisplayStateService],
-  imports: [CommonModule, InitialsComponent, PersonCountComponent],
+  imports: [
+    CommonModule,
+    InitialsComponent,
+    PersonCountComponent,
+    PersonDetailsComponent,
+  ],
 })
 export class PersonDisplayComponent implements OnInit {
   @HostBinding('class') get classBinding(): string {
