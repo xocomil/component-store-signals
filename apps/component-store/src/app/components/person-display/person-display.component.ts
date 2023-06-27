@@ -6,6 +6,7 @@ import {
   OnInit,
   inject,
 } from '@angular/core';
+import { RoundedBorderDirective } from '../../directives/rounded-border.directive';
 import { InitialsComponent } from '../initials/initials.component';
 import { PersonCountComponent } from '../person-count/person-count.component';
 import { PersonDetailsComponent } from '../person-details/person-details.component';
@@ -33,6 +34,7 @@ import { PersonDisplayStateService } from './person-display.state.service';
     InitialsComponent,
     PersonCountComponent,
     PersonDetailsComponent,
+    RoundedBorderDirective,
   ],
 })
 export class PersonDisplayComponent implements OnInit {

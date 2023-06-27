@@ -5,6 +5,7 @@ import {
   HostBinding,
   inject,
 } from '@angular/core';
+import { RoundedBorderDirective } from '../../directives/rounded-border.directive';
 import { PersonDisplayStateService } from './../person-display/person-display.state.service';
 
 @Component({
@@ -12,12 +13,12 @@ import { PersonDisplayStateService } from './../person-display/person-display.st
   standalone: true,
   imports: [CommonModule],
   template: `{{ personDisplayStateService.initials() }}`,
+  hostDirectives: [{ directive: RoundedBorderDirective }],
   styleUrls: ['./initials.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class InitialsComponent {
-  @HostBinding('class') classBinding =
-    'border rounded border-secondary p-2 text-accent';
+  @HostBinding('class') classBinding = 'border-jason-med text-accent';
 
   protected personDisplayStateService = inject(PersonDisplayStateService);
 }

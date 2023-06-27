@@ -1,16 +1,17 @@
+/* eslint-disable @angular-eslint/no-host-metadata-property */
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  HostBinding,
-  Input,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { PrimaryBorderDirective } from '../../directives/primary-border.directive';
 import { Person } from '../../models/person.model';
 
 @Component({
   selector: 'component-store-signals-person-details',
   standalone: true,
   imports: [CommonModule],
+  hostDirectives: [PrimaryBorderDirective],
+  host: {
+    class: 'border-primary',
+  },
   template: `
     <div class="text-lg font-semibold text-jason-med">
       {{ person.firstName }} {{ person.lastName }}
@@ -26,7 +27,5 @@ import { Person } from '../../models/person.model';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PersonDetailsComponent {
-  @HostBinding('class') classBinding = 'border rounded border-primary p-2';
-
   @Input({ required: true }) person!: Person;
 }
